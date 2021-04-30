@@ -13,15 +13,8 @@ function userReducer(state, action) {
         isAuthenticated: false,
         userDetails: {},
       };
-    case 'ERROR':
-      return {
-        ...state,
-        isAuthenticated: true,
-        userDetails: {},
-        error: payload,
-      };
     default:
-      throw new Error();
+      return state;
   }
 }
 
