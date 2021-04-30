@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { DispatchContext, StateContext } from '../../context/userContext';
-import './Header.css';
+// import './Header.css';
 
 const styles = {
   main: {
@@ -45,11 +45,13 @@ const Header = () => {
   console.log(state, 'context state');
 
   useEffect(() => {
-    const customerData = {
-      name: 'Test',
-      email: 'abc@abc.com',
-      password: 'qwerty',
-    };
+    const customerData = [{
+      email: "abc@abc.com",
+      firstName: "Rohith",
+      lastName: "Surya",
+      password: "qwerty",
+      userType: "Male"
+    }];
     sessionStorage.setItem('customer', JSON.stringify(customerData));
   }, []);
 
@@ -73,7 +75,7 @@ const Header = () => {
                 style={{ ...styles.loginLinks }}
                 title={state.userDetails?.email}
               >
-                Welcome, {state.userDetails?.name}
+                Welcome, {state.userDetails?.firstName}
               </h3>
               <h3
                 style={{ ...styles.loginLinks, cursor: 'pointer' }}

@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { Input, Select } from 'antd';
 import { Link, Redirect } from 'react-router-dom';
-import {
-  UserOutlined,
-  LockOutlined,
-  MailOutlined,
-  EnvironmentFilled,
-} from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { ToastContainer, toast } from 'react-toastify';
 import EcommerceImage from '../../assets/ecommerce5.png';
 import './SignUp.css';
 
@@ -15,7 +11,6 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [endPoint, setEndpoint] = useState('');
   const [userType, setUserType] = useState('');
 
   document.title = 'HandelX | Create an account';
@@ -29,14 +24,35 @@ const SignUp = () => {
       lastName,
       email,
       password,
-      endPoint,
       userType,
     };
-    // props.onRegister(data);
+    const refData = JSON.parse(sessionStorage.getItem('customer'));
+    let isNewUser = true;
+    for (let i = 0; i < refData.length; i++) {
+      if (refData[i].email === email) {
+        toast.error('An account with this email already exists', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        isNewUser = false;
+      }
+    }
+
+    if (isNewUser) {
+      refData.push(data);
+      sessionStorage.setItem('customer', JSON.stringify(refData));
+      history.push('/sign-in');
+    }
   };
 
   return (
     <div>
+      <ToastContainer />
       <div className='register-root'>
         <h1 style={{ paddingTop: '3%' }}>Welcome to HandelX</h1>
         <h4>“Ecommerce isn’t the cherry on the cake, it’s the new cake”</h4>

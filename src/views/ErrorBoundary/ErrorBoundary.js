@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import SadPup from '../../assets/sad-pup.png';
 
 class ErrorBoundary extends Component {
-  state = {
-    error: '',
-    errorInfo: '',
-    hasError: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: '',
+      errorInfo: '',
+      hasError: false,
+    };
+  }
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
   }

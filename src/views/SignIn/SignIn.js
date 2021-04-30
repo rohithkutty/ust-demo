@@ -16,11 +16,30 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const refData = JSON.parse(sessionStorage.getItem('customer'));
-    if (refData.email === email && refData.password === password) {
-      dispatch({ type: 'LOGIN_SUCCESS', payload: refData });
-      history.push('/');
-    } else {
-      toast.error('Incorrect email or password', {
+    let errorExist = false;
+    for (let i = 0; i < refData.length; i++) {
+      if (refData[i].email === email && refData[i].password === password) {
+        dispatch({ type: 'LOGIN_SUCCESS', payload: refData[i] });
+        errorExist = false;
+        history.push('/');
+      } else if (refData[i].email === email) {
+        toast.error('Incorrect password', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        errorExist = false;
+      } else {
+        errorExist = true;
+      }
+    }
+
+    if (errorExist) {
+      toast.error('No user found with this details', {
         position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
