@@ -21,7 +21,7 @@ const SignIn = () => {
       if (refData[i].email === email && refData[i].password === password) {
         dispatch({ type: 'LOGIN_SUCCESS', payload: refData[i] });
         errorExist = false;
-        history.push('/');
+        history.push('/homepage');
       } else if (refData[i].email === email) {
         toast.error('Incorrect password', {
           position: 'top-center',

@@ -43,9 +43,7 @@ describe('Header with Authenticated: true', () => {
       </BrowserRouter>
     );
     component.update();
-    expect(component.find('a[href="/sign-in"]').props().children).toEqual(
-      'Login'
-    );
+    expect(component.find('a[href="/"]').props().children).toEqual('Login');
   });
 });
 
@@ -73,8 +71,6 @@ describe('Header with Authenticated: false', () => {
   });
 
   it('should render signin link', () => {
-    expect(component.find('a[href="/sign-in"]').props().children).toEqual(
-      'Login'
-    );
+    expect(component.find('a[href="/"]').props().children).toEqual('Login');
   });
 });

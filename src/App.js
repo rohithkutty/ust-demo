@@ -31,9 +31,9 @@ function App() {
               <div style={{ marginTop: '50px' }}>
                 <Suspense fallback={<Loader />}>
                   <Switch>
-                    <Route exact path='/sign-in' component={SignIn} />
                     <Route exact path='/sign-up' component={SignUp} />
-                    <Route exact path='/' component={Homepage} />
+                    <Route exact path='/homepage' component={Homepage} />
+                    <Route exact path='/' component={SignIn} />
                   </Switch>
                 </Suspense>
               </div>

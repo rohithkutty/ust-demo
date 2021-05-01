@@ -128,7 +128,7 @@ describe('Testing SignIn', () => {
       });
       await component.update();
       component.find('form').props().onSubmit({ preventDefault: jest.fn() });
-      expect(mockHistoryPush).toHaveBeenCalledWith('/');
+      expect(mockHistoryPush).toHaveBeenCalledWith('/homepage');
     });
 
     it('should handle invalid password scenario', async () => {

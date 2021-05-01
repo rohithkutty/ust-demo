@@ -144,7 +144,7 @@ describe('SignUp', () => {
         .onChange({ target: { value: 'qwerty' } });
       component.find('[name="gender"]').props().onChange('Male');
       component.find('form').props().onSubmit({ preventDefault: jest.fn() });
-      expect(mockHistoryPush).toHaveBeenCalledWith('/sign-in');
+      expect(mockHistoryPush).toHaveBeenCalledWith('/');
     });
 
     it('should handle existing user scenario', () => {

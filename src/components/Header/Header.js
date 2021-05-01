@@ -43,13 +43,15 @@ const Header = () => {
   const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
-    const customerData = [{
-      email: "abc@abc.com",
-      firstName: "Rohith",
-      lastName: "Surya",
-      password: "qwerty",
-      userType: "Male"
-    }];
+    const customerData = [
+      {
+        email: 'abc@abc.com',
+        firstName: 'Rohith',
+        lastName: 'Surya',
+        password: 'qwerty',
+        userType: 'Male',
+      },
+    ];
     sessionStorage.setItem('customer', JSON.stringify(customerData));
   }, []);
 
@@ -63,9 +65,7 @@ const Header = () => {
   return (
     <div style={styles.main}>
       <div style={styles.root}>
-        <Link to='/'>
-          <h2 style={styles.title}>HandelX</h2>
-        </Link>
+        <h2 style={styles.title}>HandelX</h2>
         <div style={{ display: 'flex' }}>
           {state.isAuthenticated ? (
             <>
@@ -84,10 +84,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link
-                to='/sign-in'
-                style={{ ...styles.loginLinks, cursor: 'pointer' }}
-              >
+              <Link to='/' style={{ ...styles.loginLinks, cursor: 'pointer' }}>
                 Login
               </Link>
             </>

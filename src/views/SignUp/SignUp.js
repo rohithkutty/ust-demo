@@ -47,7 +47,7 @@ const SignUp = () => {
     if (isNewUser) {
       refData.push(data);
       sessionStorage.setItem('customer', JSON.stringify(refData));
-      history.push('/sign-in');
+      history.push('/');
     }
   };
 
