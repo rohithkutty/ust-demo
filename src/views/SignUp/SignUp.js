@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Select } from 'antd';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import EcommerceImage from '../../assets/ecommerce5.png';
@@ -11,11 +11,12 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [userType, setUserType] = useState('');
+  const [userType, setUserType] = useState('Male');
 
   document.title = 'HandelX | Create an account';
 
   const { Option } = Select;
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -119,15 +120,13 @@ const SignUp = () => {
             </div>
             <div className='input-field'>
               <Select
+                name='gender'
                 onChange={(e) => setUserType(e)}
-                showSearch
+                showSearch={false}
+                value={userType}
                 style={{ width: '100%' }}
                 placeholder='Please select gender'
                 optionFilterProp='children'
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
               >
                 <Option value='Male'>Male</Option>
                 <Option value='Female'>Female</Option>
