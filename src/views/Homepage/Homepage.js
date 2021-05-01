@@ -5,7 +5,6 @@ const Homepage = () => {
   const [userName, setUserName] = useState('');
 
   window.addEventListener('message', (event) => {
-    console.log(event);
     if (event.data.event_id === 'ust_message') {
       setUserName(event.data.name);
     }

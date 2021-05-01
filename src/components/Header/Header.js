@@ -42,8 +42,6 @@ const Header = () => {
   const state = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
 
-  console.log(state, 'context state');
-
   useEffect(() => {
     const customerData = [{
       email: "abc@abc.com",

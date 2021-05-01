@@ -8,9 +8,9 @@ import ErrorBoundary from './views/ErrorBoundary';
 import userReducer from './reducers/userReducer';
 import { StateContext, DispatchContext } from './context/userContext';
 
-const SignIn = lazy(() => import('./views/SignIn'));
-const SignUp = lazy(() => import('./views/SignUp'));
-const Homepage = lazy(() => import('./views/Homepage'));
+export const SignIn = lazy(() => import('./views/SignIn'));
+export const SignUp = lazy(() => import('./views/SignUp'));
+export const Homepage = lazy(() => import('./views/Homepage'));
 
 const initialState = {
   isAuthenticated: false,

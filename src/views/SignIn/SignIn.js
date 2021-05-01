@@ -18,13 +18,8 @@ const SignIn = () => {
     const refData = JSON.parse(sessionStorage.getItem('customer'));
     let errorExist = false;
     for (let i = 0; i < refData.length; i++) {
-      console.log(email, password, 'outer before here');
       if (refData[i].email === email && refData[i].password === password) {
-        console.log(email, password, 'entered before here');
-        console.log(history, 'history obj');
         dispatch({ type: 'LOGIN_SUCCESS', payload: refData[i] });
-        console.log('entered here');
-        console.log(history, 'history obj');
         errorExist = false;
         history.push('/');
       } else if (refData[i].email === email) {

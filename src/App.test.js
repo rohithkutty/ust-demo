@@ -11,6 +11,6 @@ describe('App.js', () => {
   });
 
   it('Should render properly', () => {
-    // console.log(component.debug());
+    expect(component).toHaveLength(1);
   });
 });
