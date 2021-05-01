@@ -1,7 +1,11 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const process = require('process');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -11,8 +15,29 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css'],
   },
+  optimization: isDevelopment
+    ? {}
+    : {
+        minimize: true,
+        minimizer: [
+          new UglifyJsPlugin({
+            test: /\.(js|jsx)(\?.*)?$/i,
+            exclude: /node_modules/,
+          }),
+        ],
+        splitChunks: {
+          cacheGroups: {
+            styles: {
+              name: 'styles',
+              test: /\.css$/,
+              chunks: 'all',
+              enforce: true,
+            },
+          },
+        },
+      },
   module: {
     rules: [
       {
@@ -23,7 +48,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -36,7 +61,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
         exclude: /\.module\.css$/,
       },
       {
@@ -60,10 +88,16 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
-    new HtmlWebpackPlugin({
+    new CleanWebpackPlugin(),
+    new HtmlWebPackPlugin({
       template: __dirname + '/src/index.html',
-      filename: 'index.html',
+      filename: './index.html',
       inject: 'body',
+      hash: true,
+    }),
+    new MiniCssExtractPlugin({
+      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
     }),
   ],
 };
